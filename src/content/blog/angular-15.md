@@ -1,5 +1,5 @@
 ---
-title: Angular 15
+title: Angular version 15
 description: Những thay đổi mới của Angular version 15
 pubDate: 2023-02-23T02:34:45.498Z
 heroImage: /what-s-new-in-angular-15-peerlist-cover.png
