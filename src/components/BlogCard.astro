@@ -1,0 +1,90 @@
+---
+import { Image } from "@astrojs/image/components";
+import FormattedDate from "./FormattedDate.astro";
+import type { CollectionEntry } from "astro:content";
+import Link from "./Link.astro";
+
+type Props = CollectionEntry<"blog">;
+
+const {
+  slug,
+  data: {
+    title,
+    description,
+    pubDate,
+    updatedDate,
+    heroImage: { src, alt },
+    author,
+    tags,
+  },
+} = Astro.props;
+---
+
+<li>
+  <article>
+    <a href={`/blog/${slug}`}>
+      <Image
+        {src}
+        {alt}
+        width={400}
+        height={250}
+        format="webp"
+        quality={80}
+        aspectRatio="4:1"
+      />
+    </a>
+    <a href={`/blog/${slug}/`}>
+      <h1>
+        {title}
+      </h1>
+    </a>
+    <small class="tags">
+      Tags:
+      {
+        tags.map((tag) => (
+          <Link class="tag" href={`/tags/${tag}`}>{tag}</Link>
+        ))
+      }
+    </small>
+    <p class="footer">
+      by <Link href={`/author/${author}`}>{author}</Link> |
+      <FormattedDate date={pubDate} />
+    </p>
+  </article>
+</li>
+
+<style lang="scss">
+  li {
+    display: flex;
+    margin-bottom: 2rem;
+  }
+  article {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 0 auto;
+  }
+  article :global(time) {
+    flex: 0 0 130px;
+    font-style: italic;
+    color: #595959;
+  }
+  article a:visited {
+    color: #8e32dc;
+  }
+  .tags {
+    display: flex;
+    width: 100%;
+    .tag {
+      margin-right: .5rem;
+      background-color: burlywood;
+      border-radius: 5px;
+      padding: 0 .5rem;
+    }
+  }
+  .footer {
+    width: 100%;
+    display: inline-flex;
+    // justify-content: space-around;
+  }
+</style>

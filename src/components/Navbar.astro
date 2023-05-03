@@ -1,0 +1,92 @@
+---
+import HeaderLink from "./Link.astro";
+import { Icon } from "astro-icon";
+import { GITHUB_LINK, UPWORK_LINK } from "../consts";
+import ThemeSwitcher from "./ThemeSwitcher.astro";
+---
+
+<Icon name="ei:navicon" width="30" class="nav-icon" />
+<!-- <nav aria-label="Secondary" class="secondary-nav">
+  <HeaderLink aria-label="Go to blog" href="/blog" style="secondary" class="pt-2">Blog</HeaderLink>
+  <HeaderLink aria-label="About me" href="/about" style="secondary" class="pt-2">About</HeaderLink>
+  <HeaderLink aria-label="Go to my upwork" href={UPWORK_LINK} target="_blank" style="secondary" class="pt-2">
+    Upwork
+  </HeaderLink>
+  <HeaderLink aria-label="Go to my github" href={GITHUB_LINK} target="_blank" style="secondary" class="pt-2">
+      <Icon name="mdi:github" width="30"/>
+  </HeaderLink>
+  <ThemeSwitcher id="toggle-theme-secondary"/>
+</nav> -->
+<nav aria-label="Primary" class="primary-nav">
+  <HeaderLink class="header-link" aria-label="Go to blog" href="/blog">
+    Blog
+  </HeaderLink>
+  <HeaderLink class="header-link" aria-label="About me" href="/about">
+    About
+  </HeaderLink>
+  <HeaderLink
+    class="header-link"
+    aria-label="Go to my upwork"
+    href={UPWORK_LINK}
+    target="_blank"
+  >
+    Upwork
+  </HeaderLink>
+  <HeaderLink
+    class="header-link"
+    aria-label="Go to my github"
+    href={GITHUB_LINK}
+    target="_blank"
+  >
+    <Icon name="mdi:github" width="30" />
+  </HeaderLink>
+  <ThemeSwitcher id="toggle-theme-primary" />
+</nav>
+<style lang="scss">
+  .nav-icon {
+    display: block;
+    cursor: pointer;
+  }
+  .primary-nav {
+    display: none;
+    background-color: var(--color-bg);
+    width: 100%;
+  }
+  // .secondary-nav {
+  //   display: none;
+  //   position: absolute;
+  //   top: 100%;
+  //   z-index: 10;
+  //   background-color: #fff;
+  //   width: 100%;
+  // }
+  .mobile-show {
+    display: block;
+    position: absolute;
+    top: 100%;
+    left: 0;
+  }
+  @media screen and (min-width: 640px) {
+    .nav-icon {
+      display: none;
+    }
+    .primary-nav {
+      position: inherit;
+      display: flex;
+      align-items: center;
+      width: auto;
+    }
+  }
+</style>
+<script>
+  const navIcon = document.querySelector(".nav-icon");
+  const primaryNav = document.querySelector(".primary-nav");
+  const headerLinks = document.querySelectorAll(".header-link");
+  navIcon?.addEventListener("click", (e) => {
+    e.preventDefault();
+    primaryNav?.classList.toggle("mobile-show");
+    headerLinks.forEach((headerLink) => {
+      headerLink.classList.toggle("pt-2");
+    });
+  });
+</script>

@@ -1,68 +1,73 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import MainLayout from "../layouts/MainLayout.astro";
+import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
+import { Image } from "@astrojs/image/components";
+import Link from "../components/Link.astro";
 ---
 
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-		<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-	</head>
-	<body>
-		<Header title={SITE_TITLE} />
-		<main>
-			<h1>🧑‍🚀 Hello, I'm Nguyen Anh Tuan!</h1>
-			<p>
-				Welcome to the official <a href="https://astro.build/">Astro</a> blog starter template. This
-				template serves as a lightweight, minimally-styled starting point for anyone looking to build
-				a personal website, blog, or portfolio with Astro.
-			</p>
-			<p>
-				This template comes with a few integrations already configured in your
-				<code>astro.config.mjs</code> file. You can customize your setup with
-				<a href="https://astro.build/integrations">Astro Integrations</a> to add tools like Tailwind,
-				React, or Vue to your project.
-			</p>
-			<p>Here are a few ideas on how to get started with the template:</p>
-			<ul>
-				<li>Edit this page in <code>src/pages/index.astro</code></li>
-				<li>Edit the site header items in <code>src/components/Header.astro</code></li>
-				<li>Add your name to the footer in <code>src/components/Footer.astro</code></li>
-				<li>Check out the included blog posts in <code>src/pages/blog/</code></li>
-				<li>Customize the blog post page layout in <code>src/layouts/BlogPost.astro</code></li>
-			</ul>
-			<p>
-				Have fun! If you get stuck, remember to <a href="https://docs.astro.build/"
-					>read the docs
-				</a> or <a href="https://astro.build/chat">join us on Discord</a> to ask questions.
-			</p>
-			<p>
-				Looking for a blog template with a bit more personality? Check out <a
-					href="https://github.com/Charca/astro-blog-template"
-					>astro-blog-template
-				</a> by <a href="https://twitter.com/Charca">Maxi Ferreira</a>.
-			</p>
-		</main>
-		<Footer />
-		<script>
-			declare global {
-				interface Window {
-					netlifyIdentity: any
-				}
-			}
+<MainLayout title={SITE_TITLE} description={SITE_DESCRIPTION}>
+  <main>
+    <h1>🧑‍🚀 Hello, I'm <span>Tuan</span>!</h1>
+    <p>A passionate web developer from Vietnam 🇻🇳</p>
+    <div class="about-me">
+      <Image
+        class="hero-image"
+        src="/placeholder-about-me.jpg"
+        alt="Hero Image"
+        width={200}
+        height={280}
+        quality={80}
+      />
+      <div class="content">
+        <h1>My blog</h1>
+        <p>
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eius impedit
+          blanditiis, quae adipisci corporis ipsam consequuntur nam omnis nulla
+          commodi quisquam hic aperiam exercitationem. Qui dolor officia
+          repellat facere temporibus.
+        </p>
+        <Link href="mailto:tuanna184.dev@gmail.com">Contact Me</Link>
+      </div>
+    </div>
+  </main>
+</MainLayout>
+<script>
+  declare global {
+    interface Window {
+      netlifyIdentity: any;
+    }
+  }
 
-			if (window.netlifyIdentity) {
-				window.netlifyIdentity.on("init", (user: any) => {
-					if (!user) {
-						window.netlifyIdentity.on("login", () => {
-							document.location.href = "/admin/";
-						});
-					}
-				});
-			}
-		</script>
-	</body>
-</html>
+  if (window.netlifyIdentity) {
+    window.netlifyIdentity.on("init", (user: any) => {
+      if (!user) {
+        window.netlifyIdentity.on("login", () => {
+          document.location.href = "/admin/";
+        });
+      }
+    });
+  }
+</script>
+<style lang="scss">
+  h1 {
+    span {
+      color: var(--primary-text-color);
+    }
+  }
+  .about-me {
+    display: grid;
+    align-items: center;
+
+    @media screen and (min-width: 640px) {
+      grid-template-columns: 1fr 2fr;
+      place-content: center;
+    }
+
+    .hero-image {
+      border-radius: 100vmax;
+      object-fit: cover;
+      object-position: center;
+      box-shadow: var(--shadow-lg);
+    }
+  }
+</style>

@@ -1,9 +1,19 @@
 ---
 title: Angular version 15
-description: Những thay đổi mới của Angular version 15
+description: New changes of Angular version 15
 pubDate: 2023-02-23T02:34:45.498Z
-heroImage: /what-s-new-in-angular-15-peerlist-cover.png
+heroImage:
+  {
+    src: "/what-s-new-in-angular-15-peerlist-cover.png",
+    alt: "Banner Angular v15",
+  }
+tags: ["Frontend", "Reference docs"]
+isDraft: false
+language: 'en'
+sortOrder: 2
+author: Tuanna184-dev
 ---
+
 Angular, the most in-demand, open-source front-end framework, finally drops in yet another version update – Angular 15. Previously, [Angular 14](https://www.mindinventory.com/blog/whats-new-in-angular-14/) introduced many new exciting experimental features and arrayed code best practices but it seems like this new roll-out Angular version 15, is all about gaining stability.
 
 Finally, a new stable update, which we all tech enthusiasts and the Angular community were waiting for. This new update has brought massive thrilling changes. So, let’s dive into the new world of Angular 15.
@@ -21,19 +31,17 @@ The Angular developer community has made sure that with this newly achieved stab
 Use this standalone API to bootstrap an application in a single component. Here’s how it is done:
 
 ```typescript
-import {bootstrapApplication} from '@angular/platform-browser';
-import {ImageGridComponent} from'./image-grid';
+import { bootstrapApplication } from "@angular/platform-browser";
+import { ImageGridComponent } from "./image-grid";
 
 @Component({
- standalone: true,
- selector: 'photo-gallery',
- imports: [ImageGridComponent],
- template: `
-   … <image-grid [images]="imageList"></image-grid>
- `,
+  standalone: true,
+  selector: "photo-gallery",
+  imports: [ImageGridComponent],
+  template: ` … <image-grid [images]="imageList"></image-grid> `,
 })
 export class PhotoGalleryComponent {
- // component logic
+  // component logic
 }
 
 bootstrapApplication(PhotoGalleryComponent);
@@ -48,30 +56,30 @@ You can now mark components, directives, and pipes as “`standalone: true`” �
 Angular 15 comes with a router standalone API to build the multi-route application. Here’s how you can declare the root route:
 
 ```typescript
-export const appRoutes: Routes = [{
- path: 'lazy',
- loadChildren: () => import('./lazy/lazy.routes')
-   .then(routes => routes.lazyRoutes)
-}];
+export const appRoutes: Routes = [
+  {
+    path: "lazy",
+    loadChildren: () =>
+      import("./lazy/lazy.routes").then((routes) => routes.lazyRoutes),
+  },
+];
 ```
 
 Here, lazyRoutes are declared in the following way:
 
 ```typescript
-import {Routes} from '@angular/router';
+import { Routes } from "@angular/router";
 
-import {LazyComponent} from './lazy.component';
+import { LazyComponent } from "./lazy.component";
 
-export const lazyRoutes: Routes = [{path: '', component: LazyComponent}];
+export const lazyRoutes: Routes = [{ path: "", component: LazyComponent }];
 ```
 
 You can register the `appRoutes` in the `bootstrapApplication` method and call it using the `ProvideRouter` API, which is tree-shakable!
 
 ```typescript
 bootstrapApplication(AppComponent, {
- providers: [
-   provideRouter(appRoutes)
- ]
+  providers: [provideRouter(appRoutes)],
 });
 ```
 
@@ -87,12 +95,15 @@ So, Angular v15 is finally infused with that inspiration from the [feature reque
 
 ```typescript
 @Component({
- selector: 'mat-menu',
- hostDirectives: [HasColor, {
-   directive: CdkMenu,
-   inputs: ['cdkMenuDisabled: disabled'],
-   outputs: ['cdkMenuClosed: closed']
- }]
+  selector: "mat-menu",
+  hostDirectives: [
+    HasColor,
+    {
+      directive: CdkMenu,
+      inputs: ["cdkMenuDisabled: disabled"],
+      outputs: ["cdkMenuClosed: closed"],
+    },
+  ],
 })
 class MatMenu {}
 ```
@@ -143,18 +154,18 @@ When using this Angular image directive within a component, all you need to do i
 Let’s understand this concept in a better way with one example of defining guards, verifying details – whether the user has logged in or not:
 
 ```typescript
-@Injectable({ providedIn: 'root' })
+@Injectable({ providedIn: "root" })
 export class MyGuardWithDependency implements CanActivate {
- constructor(private loginService: LoginService) {}
+  constructor(private loginService: LoginService) {}
 
- canActivate() {
-   return this.loginService.isLoggedIn();
- }
+  canActivate() {
+    return this.loginService.isLoggedIn();
+  }
 }
 
 const route = {
- path: 'somePath',
- canActivate: [MyGuardWithDependency]
+  path: "somePath",
+  canActivate: [MyGuardWithDependency],
 };
 ```
 
@@ -164,8 +175,8 @@ Thanks to Functional Router Guards, this code can be refactored into the given-b
 
 ```typescript
 const route = {
- path: 'admin',
- canActivate: [() => inject(LoginService).isLoggedIn()]
+  path: "admin",
+  canActivate: [() => inject(LoginService).isLoggedIn()],
 };
 ```
 
@@ -210,7 +221,7 @@ The improvement in the stack traces are mentioned below:
 ERROR Error: Uncaught (in promise): Error
 Error
    at app.component.ts:18:11
-   at fetch (async) 
+   at fetch (async)
    at (anonymous) (app.component.ts:4)
    at request (app.component.ts:4)
    at (anonymous) (app.component.ts:17)
@@ -226,12 +237,12 @@ As the stability is concerned for the Angular materials, the Angular developer t
 
 Here, most of the refactoring work has been done in the DOM and CSS parts. Following the new update on responsiveness, there will be some styles in the old Angular applications that need adjustments, especially in the case of CSS overriding internal elements of the migrated components.
 
-In the latest Angular v15, many components’ old implementations have been deprecated. So, to recover them, developers still have the option to go for the “*legacy*” import.
+In the latest Angular v15, many components’ old implementations have been deprecated. So, to recover them, developers still have the option to go for the “_legacy_” import.
 
 For instance, you can retrieve the old `mat-button` implementation by importing its legacy button module.
 
 ```typescript
-import {MatLegacyButtonModule} from '@angular/material/legacy-button';
+import { MatLegacyButtonModule } from "@angular/material/legacy-button";
 ```
 
 ### 8. CDK Listbox
@@ -256,9 +267,9 @@ The Angular 15 comes up with new experimental support for the `ng build --watch`
 
 Below is the list of new enhancements and enablements made in the Angular 15, which may look small but have a heavy impact.
 
-* **Router Now Auto-Unwarps Default Exports For Lazy Loading:** It simplifies the router functions by adding more enablement to reduce even more boilerplates. Here, for lazy loading, the router will look for the default export, and if it gets successful, it directly imports its lazy-file into the code.
-* **Automatic Imports In-Language Support Service – Quick Fix:** Now, write your Angular code more confidently by making the most out of the language service. You can use this feature to automatically import components and their fixes in the template, which components are not used in a standalone component or in a NgModule.
-* **Improved Angular Components:** The Angular components’ v15 covers a range of accessibility enhancements, including effective contrast ratios, expanded touch target sizes, and refined ARIA semantics. Furthermore, Angular components can have their APIs to customize their density for a better theme customization experience.
+- **Router Now Auto-Unwarps Default Exports For Lazy Loading:** It simplifies the router functions by adding more enablement to reduce even more boilerplates. Here, for lazy loading, the router will look for the default export, and if it gets successful, it directly imports its lazy-file into the code.
+- **Automatic Imports In-Language Support Service – Quick Fix:** Now, write your Angular code more confidently by making the most out of the language service. You can use this feature to automatically import components and their fixes in the template, which components are not used in a standalone component or in a NgModule.
+- **Improved Angular Components:** The Angular components’ v15 covers a range of accessibility enhancements, including effective contrast ratios, expanded touch target sizes, and refined ARIA semantics. Furthermore, Angular components can have their APIs to customize their density for a better theme customization experience.
 
 It is all about the new amendments and achievements enabled in the Angular v15, but the question is, “How will you unlock these Angular 15 capabilities?”
 
@@ -266,22 +277,23 @@ It is all about the new amendments and achievements enabled in the Angular v15, 
 
 Before upgrading to Angular v15, you must know the support extension, cancellation, and deprecations – breaking changes, to review and refactor your existing Angular build.
 
-* Angular v15 has extended its support for the node.js version 14.20.x, 16.13.x, and 18.10.x and terminated its support from versions including 14.\[15-19].x and 16\[10-12].x.
-* Angular 15 now only supports TypeScript version 4.8 or older than that.
-* In the app project directory, run the command: `ng update @angular/core@15 @angular/cli@15` to make your application fortified with Angular v15 support.
-* @keyframes name format has been changed into “`@keyframes host-my-cmp_foo { ... }`“
+- Angular v15 has extended its support for the node.js version 14.20.x, 16.13.x, and 18.10.x and terminated its support from versions including 14.\[15-19].x and 16\[10-12].x.
+- Angular 15 now only supports TypeScript version 4.8 or older than that.
+- In the app project directory, run the command: `ng update @angular/core@15 @angular/cli@15` to make your application fortified with Angular v15 support.
+- @keyframes name format has been changed into “`@keyframes host-my-cmp_foo { ... }`“
 
-  * To comply with this breaking change:
+  - To comply with this breaking change:
 
-    * Change the component’s encapsulation view to None or ShadowDom.
-    * Define this rule in the global stylesheets
-    * Define this rule in your own code.
-* Adding an explicit constructor to the class could trigger an error.
-* From the tsconfig.json file, the `enableIvy` call has been removed as in this update, Ivy is only a rendering engine.
-* The `canParse` method has been removed, so it is now compulsory to use `analyze` and `hint` parameters in the parse methods.
-* `RouterOutlet` will only instantiate the component after the completion of change detection.
-* The `DATE_PIPE_DEFAULT_TIMEZONE` function has been removed, so from now on, you need to use its replacement `DATE_PIPE_DEFAULT_OPTIONS` to define the time zone.
-* The `routerLinkWithHref` directive has been removed, so from now on, you need to use the `RouterLink` directive to handle elements with `href` attributes.
+    - Change the component’s encapsulation view to None or ShadowDom.
+    - Define this rule in the global stylesheets
+    - Define this rule in your own code.
+
+- Adding an explicit constructor to the class could trigger an error.
+- From the tsconfig.json file, the `enableIvy` call has been removed as in this update, Ivy is only a rendering engine.
+- The `canParse` method has been removed, so it is now compulsory to use `analyze` and `hint` parameters in the parse methods.
+- `RouterOutlet` will only instantiate the component after the completion of change detection.
+- The `DATE_PIPE_DEFAULT_TIMEZONE` function has been removed, so from now on, you need to use its replacement `DATE_PIPE_DEFAULT_OPTIONS` to define the time zone.
+- The `routerLinkWithHref` directive has been removed, so from now on, you need to use the `RouterLink` directive to handle elements with `href` attributes.
 
 Well, there are other methods and directives that have been removed and updated with a new simplified syntax structure. So, it’s better to go with the [Angular v14 to v15 migration guide](https://update.angular.io/?v=14.0-15.0) to ensure a smoother application migration.
 

@@ -1,25 +1,40 @@
 ---
-import HeaderLink from './HeaderLink.astro';
-import { SITE_TITLE } from '../consts';
+import { HEADER_TITLE } from "../consts";
+import Navbar from "./Navbar.astro";
+import { Image } from "@astrojs/image/components";
 ---
 
 <header>
-	<h2>
-		{SITE_TITLE}
-	</h2>
-	<nav>
-		<HeaderLink href="/">Home</HeaderLink>
-		<HeaderLink href="/blog">Blog</HeaderLink>
-		<HeaderLink href="/about">About</HeaderLink>
-		<HeaderLink href="https://twitter.com/astrodotbuild" target="_blank">Twitter</HeaderLink>
-		<HeaderLink href="https://github.com/withastro/astro" target="_blank">GitHub</HeaderLink>
-	</nav>
+  <h2>
+    <a href="/">
+      <Image
+        src={"/my-logo.svg"}
+        width={50}
+        height={50}
+        quality={80}
+        aspectRatio="1:1"
+        alt="logo"
+      />
+      {HEADER_TITLE}
+    </a>
+  </h2>
+  <Navbar />
 </header>
-<style>
-	header {
-		margin: 0em 0 2em;
-	}
-	h2 {
-		margin: 0.5em 0;
-	}
+<style lang="scss">
+  header {
+    margin: 0em 0 2em;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+		position: relative;
+  }
+  h2 {
+    margin: 0.5em 0;
+    a {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      // color: var(--secondary-text-color);
+    }
+  }
 </style>
