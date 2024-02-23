@@ -3,9 +3,9 @@ title: "Markdown Style Guide"
 description: "Here is a sample of some basic Markdown syntax that can be used when writing Markdown content in Astro."
 pubDate: "Jul 01 2022"
 heroImage: { src: "/placeholder-hero.jpg", alt: "Hero Image" }
-tags: ["Reference Docs"]
+tags: ["Reference docs"]
 isDraft: true
-language: 'en'
+language: "en"
 sortOrder: 3
 author: "Tuanna184-dev"
 ---

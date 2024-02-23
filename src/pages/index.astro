@@ -49,6 +49,12 @@ import Link from "../components/Link.astro";
   }
 </script>
 <style lang="scss">
+  /* custom media query breakpoints */
+  @custom-media --sm (width >= 480px);
+  @custom-media --md (width >= 768px);
+  @custom-media --lg (width >= 1201px);
+  @custom-media --xl (width >= 1440px);
+
   h1 {
     span {
       color: var(--primary-text-color);
@@ -58,7 +64,7 @@ import Link from "../components/Link.astro";
     display: grid;
     align-items: center;
 
-    @media screen and (min-width: 640px) {
+    @media (--md) {
       grid-template-columns: 1fr 2fr;
       place-content: center;
     }

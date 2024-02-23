@@ -20,17 +20,18 @@
   --slider-bg-before: #fff;
   --slider-input-bg: #8758ff;
   --_shadow: var(--_hue) var(--_shadow-saturation) var(--_shadow-lightness);
-  --shadow-sm:
-    0.2px 0.5px 0.6px hsl(var(--_shadow) / var(--_shadow-strength)),
+  --shadow-sm: 0.2px 0.5px 0.6px hsl(var(--_shadow) / var(--_shadow-strength)),
     0.3px 0.8px 1px -1.2px hsl(var(--_shadow) / var(--_shadow-strength)),
     0.8px 1.9px 2.3px -2.5px hsl(var(--_shadow) / var(--_shadow-strength));
-  --shadow-md:
-    0.2px 0.5px 0.6px hsl(var(--_shadow) / calc(var(--_shadow-strength) + .04)),
-    0.6px 1.5px 1.8px -0.8px hsl(var(--_shadow) / calc(var(--_shadow-strength) + .04)),
-    1.6px 3.8px 4.6px -1.7px hsl(var(--_shadow) / calc(var(--_shadow-strength) + .04)),
-    3.9px 9.3px 11.3px -2.5px hsl(var(--_shadow) / calc(var(--_shadow-strength) + .04));
-  --shadow-lg:
-    0.2px 0.5px 0.6px hsl(var(--_shadow) / var(--_shadow-strength)),
+  --shadow-md: 0.2px 0.5px 0.6px
+      hsl(var(--_shadow) / calc(var(--_shadow-strength) + 0.04)),
+    0.6px 1.5px 1.8px -0.8px hsl(var(--_shadow) /
+          calc(var(--_shadow-strength) + 0.04)),
+    1.6px 3.8px 4.6px -1.7px hsl(var(--_shadow) /
+          calc(var(--_shadow-strength) + 0.04)),
+    3.9px 9.3px 11.3px -2.5px hsl(var(--_shadow) /
+          calc(var(--_shadow-strength) + 0.04));
+  --shadow-lg: 0.2px 0.5px 0.6px hsl(var(--_shadow) / var(--_shadow-strength)),
     1.1px 2.7px 3.3px -0.4px hsl(var(--_shadow) / var(--_shadow-strength)),
     2.1px 5px 6.1px -0.7px hsl(var(--_shadow) / var(--_shadow-strength)),
     3.5px 8.3px 10.1px -1.1px hsl(var(--_shadow) / var(--_shadow-strength)),
@@ -64,10 +65,10 @@
 }
 
 /* custom media query breakpoints */
-@custom-media --sm (width >=480px);
-@custom-media --md (width >=768px);
-@custom-media --lg (width >=1201px);
-@custom-media --xl (width >=1440px);
+@custom-media --sm (width >= 480px);
+@custom-media --md (width >= 768px);
+@custom-media --lg (width >= 1201px);
+@custom-media --xl (width >= 1440px);
 
 body {
   font-family: Verdana, sans-serif;
@@ -81,6 +82,7 @@ body {
   line-height: 1.5;
   color: var(--color-text);
 }
+
 h1,
 h2,
 h3,

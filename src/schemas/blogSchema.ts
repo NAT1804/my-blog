@@ -11,7 +11,7 @@ export default z.object({
   description: z.string(),
   language: z.enum(["en", "vn"]).default("en").optional(),
   author: z.string().default("Tuanna184-dev").optional(),
-  tags: z.array(z.string()),
+  tags: z.array(z.string()).optional(),
   footnote: z.string().optional(),
   // Transform string to Date object
   pubDate: z

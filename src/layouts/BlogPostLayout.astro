@@ -2,26 +2,62 @@
 import type { CollectionEntry } from "astro:content";
 import FormattedDate from "../components/FormattedDate.astro";
 import MainLayout from "./MainLayout.astro";
+import { slugify } from "../utils/slugify.js";
+import { Image } from "@astrojs/image/components";
 
 type Props = CollectionEntry<"blog">["data"];
 
-const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
+const { title, description, pubDate, updatedDate, heroImage, tags, author } =
+  Astro.props;
 ---
 
 <MainLayout {title}>
   <main>
     <article>
-      {heroImage && <img width={720} height={360} src={heroImage.src} alt={heroImage.alt} />}
-      <h1 class="title">{title}</h1>
-      <h3 class="description">{description}</h3>
-      <FormattedDate date={pubDate} />
-      {
-        updatedDate && (
-          <div class="last-updated-on">
-            Last updated on <FormattedDate date={updatedDate} />
-          </div>
-        )
-      }
+      <div class="container">
+        {
+          heroImage && (
+            <Image
+              width={720}
+              height={360}
+              src={heroImage.src}
+              alt={heroImage.alt}
+              format="avif"
+              fit="cover"
+              quality={80}
+              aspectRatio="5:2"
+              class="hero-image"
+            />
+          )
+        }
+        <h1 class="title">{title}</h1>
+        <h3 class="description">{description}</h3>
+        {
+          author && (
+            <p>
+              by <a href={`/author/${slugify(author)}`}>{author}</a> -
+              <FormattedDate date={pubDate} />
+            </p>
+          )
+        }
+        {
+          updatedDate && (
+            <div class="last-updated-on">
+              Last updated on <FormattedDate date={updatedDate} />
+            </div>
+          )
+        }
+        {
+          tags &&
+            tags.map((tag) => (
+              <small>
+                <a href={`/tag/${slugify(tag)}`} class="badge">
+                  {tag}
+                </a>
+              </small>
+            ))
+        }
+      </div>
       <hr />
       <slot />
     </article>

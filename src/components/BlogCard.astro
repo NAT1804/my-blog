@@ -3,6 +3,7 @@ import { Image } from "@astrojs/image/components";
 import FormattedDate from "./FormattedDate.astro";
 import type { CollectionEntry } from "astro:content";
 import Link from "./Link.astro";
+import { slugify } from "../utils/slugify";
 
 type Props = CollectionEntry<"blog">;
 
@@ -38,18 +39,24 @@ const {
         {title}
       </h1>
     </a>
+    {
+      author && (
+        <p class="author">
+          by&nbsp;<Link href={`/author/${slugify(author)}`}>{author}</Link>&nbsp;|&nbsp;
+          <FormattedDate date={pubDate} />
+        </p>
+      )
+    }
     <small class="tags">
       Tags:
       {
-        tags.map((tag) => (
-          <Link class="tag" href={`/tags/${tag}`}>{tag}</Link>
+        tags?.map((tag) => (
+          <Link class="tag" href={`/tags/${slugify(tag)}`}>
+            {tag}
+          </Link>
         ))
       }
     </small>
-    <p class="footer">
-      by <Link href={`/author/${author}`}>{author}</Link> |
-      <FormattedDate date={pubDate} />
-    </p>
   </article>
 </li>
 
@@ -63,6 +70,11 @@ const {
     flex-direction: column;
     align-items: flex-start;
     margin: 0 auto;
+    box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
+    padding: 8px;
+    // -webkit-box-shadow: 0px 0px 10px 5px rgba(0,0,0,0.3);
+    // -moz-box-shadow: 0px 0px 10px 5px rgba(0,0,0,0.3);
   }
   article :global(time) {
     flex: 0 0 130px;
@@ -76,13 +88,14 @@ const {
     display: flex;
     width: 100%;
     .tag {
-      margin-right: .5rem;
+      margin-right: 0.5rem;
       background-color: burlywood;
       border-radius: 5px;
-      padding: 0 .5rem;
+      padding: 0 0.5rem;
     }
   }
-  .footer {
+  .author {
+    margin-top: 0;
     width: 100%;
     display: inline-flex;
     // justify-content: space-around;

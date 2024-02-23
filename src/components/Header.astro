@@ -1,20 +1,22 @@
 ---
 import { HEADER_TITLE } from "../consts";
 import Navbar from "./Navbar.astro";
-import { Image } from "@astrojs/image/components";
+// import { Image } from "@astrojs/image/components";
+import { Icon } from "astro-icon";
 ---
 
 <header>
   <h2>
-    <a href="/">
-      <Image
+    <a href="/" class="mylogo" aria-label="Go home">
+      <Icon name="mylogo" width="60" />
+      <!-- <Image
         src={"/my-logo.svg"}
         width={50}
         height={50}
         quality={80}
         aspectRatio="1:1"
         alt="logo"
-      />
+      /> -->
       {HEADER_TITLE}
     </a>
   </h2>
@@ -26,7 +28,7 @@ import { Image } from "@astrojs/image/components";
     display: flex;
     align-items: center;
     justify-content: space-between;
-		position: relative;
+    position: relative;
   }
   h2 {
     margin: 0.5em 0;
