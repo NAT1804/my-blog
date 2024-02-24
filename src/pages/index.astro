@@ -8,26 +8,21 @@ import Link from "../components/Link.astro";
 <MainLayout title={SITE_TITLE} description={SITE_DESCRIPTION}>
   <main>
     <h1>🧑‍🚀 Hello, I'm <span>Tuan</span>!</h1>
-    <p>A passionate web developer from Vietnam 🇻🇳</p>
+    <h3>A passionate web developer from Vietnam 🇻🇳</h3>
     <div class="about-me">
       <Image
         class="hero-image"
-        src="/placeholder-about-me.jpg"
+        src="/personal-img.jpg"
         alt="Hero Image"
         width={200}
         height={280}
         quality={80}
       />
-      <div class="content">
-        <h1>My blog</h1>
-        <p>
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eius impedit
-          blanditiis, quae adipisci corporis ipsam consequuntur nam omnis nulla
-          commodi quisquam hic aperiam exercitationem. Qui dolor officia
-          repellat facere temporibus.
-        </p>
-        <Link href="mailto:tuanna184.dev@gmail.com">Contact Me</Link>
-      </div>
+      Glad you visited my website.<br />
+      Please visit <a href="/blog">my blog</a> to learn about web development knowledge,
+      especially front-end.<br />
+      Add more information <a href="/about">about me</a>
+      <Link href="mailto:tuanna184.dev@gmail.com">Contact Me</Link>
     </div>
   </main>
 </MainLayout>
@@ -61,19 +56,22 @@ import Link from "../components/Link.astro";
     }
   }
   .about-me {
-    display: grid;
-    align-items: center;
+    // display: grid;
+    // align-items: center;
 
     @media (--md) {
-      grid-template-columns: 1fr 2fr;
-      place-content: center;
+      // grid-template-columns: 1fr 2fr;
+      // place-content: center;
     }
 
     .hero-image {
-      border-radius: 100vmax;
+      border-radius: 10px;
+      margin-right: 10px;
+      margin-bottom: 10px;
       object-fit: cover;
       object-position: center;
       box-shadow: var(--shadow-lg);
+      float: left;
     }
   }
 </style>

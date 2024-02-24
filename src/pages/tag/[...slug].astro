@@ -1,0 +1,53 @@
+---
+// content imports
+import { getCollection } from "astro:content";
+
+// data imports
+import { tagsData } from "../../data/tag-data";
+
+// js utils imports
+import { getListFiteredBlog } from "../../utils/filter-blog";
+import { slugify } from "../../utils/slugify";
+
+// component imports
+import MainLayout from "../../layouts/MainLayout.astro";
+import BlogCard from "../../components/BlogCard.astro";
+
+export async function getStaticPaths() {
+  return tagsData.map((i: any) => {
+    return {
+      params: { slug: i.slug },
+      props: { name: i.name },
+    };
+  });
+}
+const { slug } = Astro.params;
+const { name } = Astro.props;
+
+const allBlogs = await getCollection("blog");
+const filteredBlogs = getListFiteredBlog(allBlogs);
+const blogsFilteredByTag = filteredBlogs.filter((blog) =>
+  blog.data.tags.map((tag: any) => slugify(tag)).includes(slug)
+);
+---
+
+<MainLayout title={name} description={`Post about ${name}`}>
+  <main>
+    <section class="container" aria-label={`Post about ${name}`}>
+      <h1 class="h1">Post about <span>{name}</span></h1>
+      <ul>
+        {blogsFilteredByTag.map((blog) => <BlogCard {...blog} />)}
+      </ul>
+    </section>
+  </main>
+</MainLayout>
+
+<style>
+  ul {
+    list-style-type: none;
+    padding: unset;
+  }
+  .h1 span {
+    color: var(--primary-text-color);
+  }
+</style>

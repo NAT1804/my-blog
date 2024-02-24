@@ -4,6 +4,9 @@
   License MIT: https://github.com/HermanMartinus/bearblog/blob/master/LICENSE.md
  */
 
+/* Import font Montserrat */
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+
 :root {
   --primary-text-color: #fc8c35;
   --primary-text-hover-color: #fd9444;
@@ -39,6 +42,8 @@
     8.7px 20.7px 25.3px -1.8px hsl(var(--_shadow) / var(--_shadow-strength)),
     13.3px 31.4px 38.4px -2.1px hsl(var(--_shadow) / var(--_shadow-strength)),
     19.6px 46.3px 56.6px -2.5px hsl(var(--_shadow) / var(--_shadow-strength));
+  --header-height: 82px;
+  --footer-height: 75px;
 }
 
 [data-theme="light"] {
@@ -71,8 +76,9 @@
 @custom-media --xl (width >= 1440px);
 
 body {
-  font-family: Verdana, sans-serif;
-  margin: auto;
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  margin: var(--header-height) auto var(--footer-height);
   padding: 20px;
   max-width: 65ch;
   text-align: left;

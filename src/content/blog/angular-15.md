@@ -7,9 +7,9 @@ heroImage:
     src: "/what-s-new-in-angular-15-peerlist-cover.png",
     alt: "Banner Angular v15",
   }
-tags: ["Frontend", "Reference docs"]
+tags: ["Front-End", "Reference docs"]
 isDraft: false
-language: 'en'
+language: "en"
 sortOrder: 2
 author: Tuanna184-dev
 ---

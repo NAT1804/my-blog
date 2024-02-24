@@ -24,14 +24,22 @@ import { Icon } from "astro-icon";
 </header>
 <style lang="scss">
   header {
-    margin: 0em 0 2em;
+    // margin: 0em 0 2em;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    position: relative;
+    justify-content: space-evenly;
+    // position: relative;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    background-color: var(--color-bg);
+    height: var(--header-height);
+    box-shadow: var(--shadow-md);
   }
   h2 {
     margin: 0.5em 0;
+    // width: 100%;
     a {
       display: flex;
       align-items: center;
