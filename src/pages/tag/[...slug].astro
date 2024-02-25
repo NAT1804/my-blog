@@ -2,9 +2,6 @@
 // content imports
 import { getCollection } from "astro:content";
 
-// data imports
-import { tagsData } from "../../data/tag-data";
-
 // js utils imports
 import { getListFiteredBlog } from "../../utils/filter-blog";
 import { slugify } from "../../utils/slugify";
@@ -14,29 +11,44 @@ import MainLayout from "../../layouts/MainLayout.astro";
 import BlogCard from "../../components/BlogCard.astro";
 
 export async function getStaticPaths() {
-  return tagsData.map((i: any) => {
+  const allBlogs = await getCollection("blog");
+  const filteredBlogs = getListFiteredBlog(allBlogs);
+  const allTags = [
+    ...new Set(
+      filteredBlogs.reduce((acc, curr) => {
+        return acc.concat(curr.data.tags);
+      }, [])
+    ),
+  ];
+  return allTags.map((tag: any) => {
+    const blogsFilteredByTag = filteredBlogs.filter((blog) =>
+      blog.data.tags.includes(tag)
+    );
     return {
-      params: { slug: i.slug },
-      props: { name: i.name },
+      params: { slug: slugify(tag) },
+      props: {
+        tagName: tag,
+        posts: blogsFilteredByTag,
+      },
     };
   });
 }
-const { slug } = Astro.params;
-const { name } = Astro.props;
 
-const allBlogs = await getCollection("blog");
-const filteredBlogs = getListFiteredBlog(allBlogs);
-const blogsFilteredByTag = filteredBlogs.filter((blog) =>
-  blog.data.tags.map((tag: any) => slugify(tag)).includes(slug)
-);
+const { tagName, posts } = Astro.props;
+
+// const allBlogs = await getCollection("blog");
+// const filteredBlogs = getListFiteredBlog(allBlogs);
+// const blogsFilteredByTag = filteredBlogs.filter((blog) =>
+//   blog.data.tags.map((tag: any) => slugify(tag)).includes(slug)
+// );
 ---
 
-<MainLayout title={name} description={`Post about ${name}`}>
+<MainLayout title={tagName} description={`Post about ${tagName}`}>
   <main>
-    <section class="container" aria-label={`Post about ${name}`}>
-      <h1 class="h1">Post about <span>{name}</span></h1>
+    <section class="container" aria-label={`Post about ${tagName}`}>
+      <h1 class="h1">Post about <span>{tagName}</span></h1>
       <ul>
-        {blogsFilteredByTag.map((blog) => <BlogCard {...blog} />)}
+        {posts.map((blog: any) => <BlogCard {...blog} />)}
       </ul>
     </section>
   </main>

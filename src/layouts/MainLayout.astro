@@ -5,19 +5,30 @@ import Header from "../components/Header.astro";
 
 import "../styles/global.css";
 
-interface Props {
-  title?: string;
-  description?: string;
+export interface Props {
+  title: string;
+  description: string;
+  image?: {
+    src: string;
+    alt: string;
+  };
+  data?: any;
+  robots?: any;
 }
 
-const { title = "Default Title", description = "Default Description" } =
-  Astro.props as Props;
+const {
+  title = "Default Title",
+  description = "Default Description",
+  image,
+  data,
+  robots,
+} = Astro.props;
 ---
 
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <BaseHead {title} {description} />
+    <BaseHead {title} {description} {image} {data} {robots} />
   </head>
   <body>
     <Header {title} />

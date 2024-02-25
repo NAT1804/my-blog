@@ -2,10 +2,18 @@
 import { getCollection } from "astro:content";
 import MainLayout from "../../layouts/MainLayout.astro";
 import BlogCard from "../../components/BlogCard.astro";
+import Pagination from "../../components/Pagination.astro";
 import { getListFiteredBlog } from "../../utils/filter-blog";
 
-const allBlogs = await getCollection("blog");
-const filteredBlogs = getListFiteredBlog(allBlogs);
+export async function getStaticPaths({ paginate }: any) {
+  const allBlogs = await getCollection("blog");
+  const filteredBlogs = getListFiteredBlog(allBlogs);
+  return paginate(filteredBlogs, {
+    pageSize: 2,
+  });
+}
+
+const { page } = Astro.props;
 ---
 
 <MainLayout title="Welcome to my blogs" description="My list blog">
@@ -13,13 +21,17 @@ const filteredBlogs = getListFiteredBlog(allBlogs);
     <section aria-label="My list blog">
       <h1 class="h1">My blogs</h1>
       <ul>
-        {filteredBlogs.map((blog) => <BlogCard {...blog} />)}
+        {page.data.map((blog: any) => <BlogCard {...blog} />)}
       </ul>
+      <Pagination prevUrl={page.url.prev} nextUrl={page.url.next} />
     </section>
   </main>
 </MainLayout>
 
 <style>
+  h1 {
+    text-align: center;
+  }
   ul {
     list-style-type: none;
     padding: unset;

@@ -3,13 +3,17 @@ import BlogPostLayout from "../layouts/BlogPostLayout.astro";
 ---
 
 <BlogPostLayout
-  isDraft={false}
-  title="👋, I'm Tuan Anh Nguyen"
-  description="A passionate web developer from Vietnam 🇻🇳"
-  pubDate={new Date("August 08 2021")}
-  updatedDate={new Date("February 24 2024")}
-  heroImage={{ src: "/placeholder-about-me.jpg", alt: "Hero Image" }}
-  sortOrder={1}
+  data={{
+    title: "👋, I'm Tuan Anh Nguyen",
+    description: "A passionate web developer from Vietnam 🇻🇳",
+    pubDate: new Date("August 08 2021"),
+    updatedDate: new Date("February 24 2024"),
+    heroImage: { src: "/placeholder-about-me.jpg", alt: "Hero Image" },
+    sortOrder: 1,
+    isDraft: false,
+    tags: [],
+    author: "",
+  }}
 >
   <ul>
     <li>🔭 I’m currently working in Vietnam</li>
@@ -17,7 +21,8 @@ import BlogPostLayout from "../layouts/BlogPostLayout.astro";
     <li>
       👯 I’m looking to collaborate on <a
         href="https://www.upwork.com/freelancers/~0167aee0aafa513df7"
-        >My Upwork</a>
+        >My Upwork</a
+      >
     </li>
     <li>💬 Ask me about: Angular</li>
     <li>📫 How to reach me: tuanna184.dev@gmail.com</li>

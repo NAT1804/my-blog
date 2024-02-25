@@ -1,0 +1,52 @@
+---
+import { Icon } from "astro-icon";
+import Link from "./Link.astro";
+
+const { prevUrl, nextUrl } = Astro.props;
+---
+
+<nav class="pagination" aria-label="Blog pages">
+  <div>
+    {
+      prevUrl && (
+        <Link
+          class="header-link"
+          aria-label="Previous button"
+          href={prevUrl}
+          style="secondary"
+        >
+          <Icon name="tabler:arrow-big-left-line" width="30" />
+          <span>Previous</span>
+        </Link>
+      )
+    }
+  </div>
+  <div>
+    {
+      nextUrl && (
+        <Link
+          class="header-link"
+          aria-label="Previous button"
+          href={nextUrl}
+          style="secondary"
+        >
+          <span>Next</span>
+          <Icon name="tabler:arrow-big-right-line" width="30" />
+        </Link>
+      )
+    }
+  </div>
+</nav>
+
+<style>
+  .pagination {
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+  .header-link {
+    /* display: inline-block; */
+  }
+</style>

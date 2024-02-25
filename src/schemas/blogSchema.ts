@@ -26,4 +26,5 @@ export default z.object({
   authorContact: z.string().email().optional(),
   // Advanced: Validate that the string is also a URL
   canonicalURL: z.string().url().optional(),
+  robots: z.boolean().optional(),
 });

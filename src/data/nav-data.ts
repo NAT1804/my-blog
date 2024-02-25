@@ -6,6 +6,7 @@ interface INav {
   ariaLabel: string;
   icon?: {
     name: string;
+    width: string;
   };
 }
 

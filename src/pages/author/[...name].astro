@@ -1,0 +1,58 @@
+---
+// content imports
+import { getCollection } from "astro:content";
+
+// data imports
+// import { authorsData } from "../../data/author-data";
+
+// js utils imports
+import { getListFiteredBlog } from "../../utils/filter-blog";
+import { slugify } from "../../utils/slugify";
+
+// component imports
+import MainLayout from "../../layouts/MainLayout.astro";
+import BlogCard from "../../components/BlogCard.astro";
+
+export async function getStaticPaths() {
+  const allBlogs = await getCollection("blog");
+  const filteredBlogs = getListFiteredBlog(allBlogs);
+  const allAuthors = [
+    ...new Set(filteredBlogs.map((post) => post.data.author).flat()),
+  ];
+  return allAuthors.map((author: any) => {
+    const blogsFilteredByAuthor = filteredBlogs.filter(
+      (blog) => blog.data.author === author
+    );
+    return {
+      params: { name: slugify(author) },
+      props: {
+        authorName: author,
+        posts: blogsFilteredByAuthor,
+      },
+    };
+  });
+}
+
+const { authorName, posts } = Astro.props;
+---
+
+<MainLayout title={authorName} description={`Post about ${authorName}`}>
+  <main>
+    <section class="container" aria-label={`Post about ${authorName}`}>
+      <h1 class="h1">Posts by <span>{authorName}</span></h1>
+      <ul>
+        {posts.map((blog: any) => <BlogCard {...blog} />)}
+      </ul>
+    </section>
+  </main>
+</MainLayout>
+
+<style>
+  ul {
+    list-style-type: none;
+    padding: unset;
+  }
+  .h1 span {
+    color: var(--primary-text-color);
+  }
+</style>
