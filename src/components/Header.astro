@@ -1,5 +1,5 @@
 ---
-import { HEADER_TITLE } from "../consts";
+// import { HEADER_TITLE } from "../consts";
 import Navbar from "./Navbar.astro";
 // import { Image } from "@astrojs/image/components";
 import { Icon } from "astro-icon";
@@ -18,7 +18,7 @@ import { Icon } from "astro-icon";
     // margin: 0em 0 2em;
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: space-between;
     // position: relative;
     position: fixed;
     top: 0;
@@ -27,6 +27,9 @@ import { Icon } from "astro-icon";
     background-color: var(--color-bg);
     height: var(--header-height);
     box-shadow: var(--shadow-md);
+    max-width: 65ch;
+    margin: auto;
+    padding: 0 20px;
   }
   h2 {
     margin: 0.5em 0;

@@ -149,7 +149,6 @@ const { id } = Astro.props;
 
   // Function that will switch the theme based on the if the theme toggle is checked or not
   function switchTheme(e: any) {
-    console.log('click')
     if (e.target.checked) {
       document.documentElement.setAttribute("data-theme", "dark");
       localStorage.setItem("theme", "dark");
