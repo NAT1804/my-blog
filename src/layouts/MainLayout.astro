@@ -8,10 +8,7 @@ import "../styles/global.css";
 export interface Props {
   title: string;
   description: string;
-  image?: {
-    src: string;
-    alt: string;
-  };
+  image?: string;
   data?: any;
   robots?: any;
 }
@@ -25,14 +22,24 @@ const {
 } = Astro.props;
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <BaseHead {title} {description} {image} {data} {robots} />
   </head>
   <body>
     <Header {title} />
-    <slot>Default text</slot>
+    <main class="container">
+      <slot />
+    </main>
     <Footer />
   </body>
 </html>
+
+<style>
+  @reference "styles/global.css";
+
+  .container {
+    @apply max-w-2xl mx-auto mt-[var(--header-height)] mb-[var(--footer-height)] min-h-[calc(100vh-var(--header-height)-var(--footer-height))] py-2;
+  }
+</style>

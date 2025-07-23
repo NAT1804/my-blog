@@ -1,11 +1,14 @@
 ---
-import { Icon } from "astro-icon";
+import { Icon } from "astro-icon/components";
 import Link from "./Link.astro";
 
 const { prevUrl, nextUrl } = Astro.props;
 ---
 
-<nav class="pagination" aria-label="Blog pages">
+<nav
+  class="pagination text-center flex items-center justify-between w-full"
+  aria-label="Blog pages"
+>
   <div>
     {
       prevUrl && (
@@ -15,7 +18,7 @@ const { prevUrl, nextUrl } = Astro.props;
           href={prevUrl}
           style="secondary"
         >
-          <Icon name="tabler:arrow-big-left-line" width="30" />
+          <Icon name="tabler:arrow-big-left-line" size={30} />
           <span>Previous</span>
         </Link>
       )
@@ -31,22 +34,9 @@ const { prevUrl, nextUrl } = Astro.props;
           style="secondary"
         >
           <span>Next</span>
-          <Icon name="tabler:arrow-big-right-line" width="30" />
+          <Icon name="tabler:arrow-big-right-line" size={30} />
         </Link>
       )
     }
   </div>
 </nav>
-
-<style>
-  .pagination {
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-  }
-  .header-link {
-    /* display: inline-block; */
-  }
-</style>

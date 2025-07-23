@@ -1,5 +1,5 @@
 ---
-import { Image } from "@astrojs/image/components";
+import { Image } from "astro:assets";
 import FormattedDate from "./FormattedDate.astro";
 import type { CollectionEntry } from "astro:content";
 import Link from "./Link.astro";
@@ -14,24 +14,25 @@ const {
     description,
     pubDate,
     updatedDate,
-    heroImage: { src, alt },
+    heroImage: src,
     author,
     tags,
   },
 } = Astro.props;
 ---
 
-<li>
-  <article>
+<li class="flex mb-8">
+  <article
+    class="flex flex-col items-start mx-auto shadow-[0px_0px_10px_5px_rgba(0,0,0,0.3)] rounded p-2"
+  >
     <a href={`/blog/${slug}`}>
       <Image
         {src}
-        {alt}
+        alt={title}
         width={400}
         height={250}
         format="webp"
         quality={80}
-        aspectRatio="4:1"
       />
     </a>
     <a href={`/blog/${slug}/`}>
@@ -41,18 +42,21 @@ const {
     </a>
     {
       author && (
-        <p class="author">
+        <p class="author mt-0 w-full inline-flex">
           by&nbsp;<Link href={`/author/${slugify(author)}`}>{author}</Link>
           &nbsp;|&nbsp;
           <FormattedDate date={pubDate} />
         </p>
       )
     }
-    <small class="tags">
+    <small class="tags flex w-full">
       Tags:
       {
         tags?.map((tag) => (
-          <Link class="tag" href={`/tag/${slugify(tag)}`}>
+          <Link
+            class="tag mr-2 bg-[burlywood] rounded-[5px] px-2"
+            href={`/tag/${slugify(tag)}`}
+          >
             {tag}
           </Link>
         ))
@@ -60,45 +64,3 @@ const {
     </small>
   </article>
 </li>
-
-<style lang="scss">
-  li {
-    display: flex;
-    margin-bottom: 2rem;
-  }
-  article {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    margin: 0 auto;
-    box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.3);
-    border-radius: 4px;
-    padding: 8px;
-    // -webkit-box-shadow: 0px 0px 10px 5px rgba(0,0,0,0.3);
-    // -moz-box-shadow: 0px 0px 10px 5px rgba(0,0,0,0.3);
-  }
-  article :global(time) {
-    flex: 0 0 130px;
-    font-style: italic;
-    color: #595959;
-  }
-  article a:visited {
-    color: #8e32dc;
-  }
-  .tags {
-    display: flex;
-    width: 100%;
-    .tag {
-      margin-right: 0.5rem;
-      background-color: burlywood;
-      border-radius: 5px;
-      padding: 0 0.5rem;
-    }
-  }
-  .author {
-    margin-top: 0;
-    width: 100%;
-    display: inline-flex;
-    // justify-content: space-around;
-  }
-</style>

@@ -3,7 +3,7 @@ import { getCollection } from "astro:content";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 import { getListFiteredBlog } from "../utils/filter-blog";
 
-export async function get(context) {
+export async function GET(context) {
   const posts = await getCollection("blog");
   const filteredPosts = getListFiteredBlog(posts);
   return rss({

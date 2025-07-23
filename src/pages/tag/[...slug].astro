@@ -44,22 +44,10 @@ const { tagName, posts } = Astro.props;
 ---
 
 <MainLayout title={tagName} description={`Post about ${tagName}`}>
-  <main>
-    <section class="container" aria-label={`Post about ${tagName}`}>
-      <h1 class="h1">Post about <span>{tagName}</span></h1>
-      <ul>
-        {posts.map((blog: any) => <BlogCard {...blog} />)}
-      </ul>
-    </section>
-  </main>
+  <section class="container" aria-label={`Post about ${tagName}`}>
+    <h1 class="h1">Post about <span class="text-primary">{tagName}</span></h1>
+    <ul class="list-none p-0">
+      {posts.map((blog: any) => <BlogCard {...blog} />)}
+    </ul>
+  </section>
 </MainLayout>
-
-<style>
-  ul {
-    list-style-type: none;
-    padding: unset;
-  }
-  .h1 span {
-    color: var(--primary-text-color);
-  }
-</style>

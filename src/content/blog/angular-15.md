@@ -2,11 +2,7 @@
 title: Angular version 15
 description: New changes of Angular version 15
 pubDate: 2023-02-23T02:34:45.498Z
-heroImage:
-  {
-    src: "/what-s-new-in-angular-15-peerlist-cover.png",
-    alt: "Banner Angular v15",
-  }
+heroImage: "/what-s-new-in-angular-15-peerlist-cover.png"
 tags: ["Front-End", "Reference docs"]
 isDraft: false
 language: "en"

@@ -1,13 +1,20 @@
 ---
 import HeaderLink from "./Link.astro";
-import { Icon } from "astro-icon";
+import { Icon } from "astro-icon/components";
 import ThemeSwitcher from "./ThemeSwitcher.astro";
 
 import { navData } from "../data/nav-data";
 ---
 
-<Icon name="ei:navicon" width="30" class="nav-icon" />
-<nav aria-label="Primary" class="primary-nav">
+<Icon
+  name="tabler:menu-2"
+  size={30}
+  class="nav-icon block cursor-pointer md:hidden"
+/>
+<nav
+  aria-label="Primary"
+  class="primary-nav hidden bg-bg w-full md:flex md:items-center md:w-auto"
+>
   {
     navData.map((item) => (
       <HeaderLink
@@ -15,48 +22,13 @@ import { navData } from "../data/nav-data";
         aria-label={item.ariaLabel}
         href={item.path}
       >
-        {item.icon && <Icon name={item.icon.name} width="30" />}
+        {item.icon && <Icon name={item.icon.name} size={30} />}
         {item.name}
       </HeaderLink>
     ))
   }
   <ThemeSwitcher id="toggle-theme-primary" />
 </nav>
-
-<style lang="scss">
-  /* custom media query breakpoints */
-  @custom-media --sm (width >= 480px);
-  @custom-media --md (width >= 768px);
-  @custom-media --lg (width >= 1201px);
-  @custom-media --xl (width >= 1440px);
-
-  .nav-icon {
-    display: block;
-    cursor: pointer;
-  }
-  .primary-nav {
-    display: none;
-    background-color: var(--color-bg);
-    width: 100%;
-  }
-  .mobile-show {
-    display: block;
-    position: absolute;
-    top: 100%;
-    left: 0;
-  }
-  @media screen and (--md) {
-    .nav-icon {
-      display: none;
-    }
-    .primary-nav {
-      // position: inherit;
-      display: flex;
-      align-items: center;
-      width: auto;
-    }
-  }
-</style>
 
 <script>
   const navIcon = document.querySelector(".nav-icon");
@@ -66,7 +38,14 @@ import { navData } from "../data/nav-data";
     e.preventDefault();
     primaryNav?.classList.toggle("mobile-show");
     headerLinks.forEach((headerLink) => {
-      headerLink.classList.toggle("pt-2");
+      headerLink.classList.toggle("py-2");
     });
   });
 </script>
+
+<style>
+  @reference "styles/global.css";
+  .mobile-show {
+    @apply block absolute top-full left-0;
+  }
+</style>

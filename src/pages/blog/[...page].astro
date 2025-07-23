@@ -4,6 +4,8 @@ import MainLayout from "../../layouts/MainLayout.astro";
 import BlogCard from "../../components/BlogCard.astro";
 import Pagination from "../../components/Pagination.astro";
 import { getListFiteredBlog } from "../../utils/filter-blog";
+import type { Page } from "astro";
+import type { CollectionEntry } from "astro:content";
 
 export async function getStaticPaths({ paginate }: any) {
   const allBlogs = await getCollection("blog");
@@ -13,27 +15,19 @@ export async function getStaticPaths({ paginate }: any) {
   });
 }
 
-const { page } = Astro.props;
+interface Props {
+  page: Page<CollectionEntry<"blog">>;
+}
+
+const { page } = Astro.props as Props;
 ---
 
 <MainLayout title="Welcome to my blogs" description="My list blog">
-  <main>
-    <section aria-label="My list blog">
-      <h1 class="h1">My blogs</h1>
-      <ul>
-        {page.data.map((blog: any) => <BlogCard {...blog} />)}
-      </ul>
-      <Pagination prevUrl={page.url.prev} nextUrl={page.url.next} />
-    </section>
-  </main>
+  <section aria-label="My list blog">
+    <h1 class="text-2xl font-bold py-2">My blogs</h1>
+    <ul class="list-none p-0">
+      {page.data.map((blog: any) => <BlogCard {...blog} />)}
+    </ul>
+    <Pagination prevUrl={page.url.prev} nextUrl={page.url.next} />
+  </section>
 </MainLayout>
-
-<style>
-  h1 {
-    text-align: center;
-  }
-  ul {
-    list-style-type: none;
-    padding: unset;
-  }
-</style>

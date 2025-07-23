@@ -2,10 +2,12 @@
 const { id } = Astro.props;
 ---
 
-<div class="theme-switch-wrapper">
-  <label class="theme-switch" for={id}>
-    <input type="checkbox" id={id} />
-    <div class="slider">
+<div class="theme-switch-wrapper flex justify-end items-center">
+  <label class="theme-switch inline-block h-[34px] relative w-[60px]" for={id}>
+    <input type="checkbox" id={id} class="hidden" />
+    <div
+      class="slider bg-slider-bg absolute inset-0 cursor-pointer transition-all duration-400 rounded-[34px] before:content-[''] before:bg-slider-bg-before before:absolute before:bottom-1 before:left-1 before:h-[26px] before:w-[26px] before:transition-all before:duration-400 before:rounded-full"
+    >
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="16"
@@ -16,7 +18,7 @@ const { id } = Astro.props;
         stroke-width="2"
         stroke-linecap="round"
         stroke-linejoin="round"
-        class="feather feather-sun"
+        class="feather-sun text-[#222] absolute opacity-100 right-[10px] bottom-[9px] transform translate-x-0 transition-all duration-[0.35s] pointer-events-none"
       >
         <circle cx="12" cy="12" r="5"></circle>
         <line x1="12" y1="1" x2="12" y2="3"></line>
@@ -38,7 +40,7 @@ const { id } = Astro.props;
         stroke-width="2"
         stroke-linecap="round"
         stroke-linejoin="round"
-        class="feather feather-moon"
+        class="feather-moon text-[#222] absolute opacity-0 left-[9px] bottom-[9px] transform translate-x-1 transition-all duration-[0.35s] pointer-events-none"
       >
         <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
       </svg>
@@ -47,86 +49,25 @@ const { id } = Astro.props;
 </div>
 
 <style>
-  .theme-switch-wrapper {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-  }
-
-  .theme-switch {
-    display: inline-block;
-    height: 34px;
-    position: relative;
-    width: 60px;
-  }
-
-  .theme-switch input {
-    display: none;
-  }
-
-  .slider {
-    background-color: var(--slider-bg);
-    bottom: 0;
-    cursor: pointer;
-    left: 0;
-    position: absolute;
-    right: 0;
-    top: 0;
-    transition: 0.4s;
-    border-radius: 34px;
-  }
-
-  .slider:before {
-    background-color: var(--slider-bg-before);
-    bottom: 4px;
-    content: "";
-    height: 26px;
-    left: 4px;
-    position: absolute;
-    transition: 0.4s;
-    width: 26px;
-    border-radius: 50%;
-  }
+  @reference "styles/global.css";
 
   input:checked + .slider {
-    background-color: var(--slider-input-bg);
+    @apply bg-slider-input-bg;
   }
 
   input:checked + .slider:before {
-    transform: translateX(26px);
-  }
-
-  .slider svg {
-    color: #222;
-    position: absolute;
-    transition: opacity 0.2s ease 0s, transform 0.35s ease 0s;
-    pointer-events: none;
-  }
-
-  .feather-moon {
-    opacity: 0;
-    left: 9px;
-    bottom: 9px;
-    transform: translateX(4px);
-  }
-
-  .feather-sun {
-    opacity: 1;
-    right: 10px;
-    bottom: 9px;
-    transform: translateX(0px);
+    @apply translate-x-[26px];
   }
 
   input:checked + .slider .feather-moon {
-    opacity: 1;
-    transform: translateX(0);
+    @apply opacity-100 translate-x-0;
   }
 
   input:checked + .slider .feather-sun {
-    opacity: 0;
-    transform: translateX(-4px);
+    @apply opacity-0 -translate-x-1;
   }
 </style>
+
 <script>
   // Get the theme toggle input
   const themeToggle = document.querySelector(

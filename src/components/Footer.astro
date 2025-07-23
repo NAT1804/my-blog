@@ -1,32 +1,19 @@
 ---
-import { Icon } from "astro-icon";
+import { Icon } from "astro-icon/components";
 const today = new Date();
 ---
 
-<footer>
+<footer
+  class="fixed bottom-0 left-0 right-0 py-[25px] text-center w-full h-[calc(var(--footer-height))] bg-bg shadow-md"
+>
   <small>
     Copyright &copy; {today.getFullYear()}
     <span id="copyright">TUAN ANH NGUYEN</span> | All rights reserved.
   </small>
-  <small>
-    <a href="/rss.xml">
+  <small class="inline-block">
+    <a href="/rss.xml" class="flex items-center justify-center gap-2">
       Subcribe to RSS
-      <Icon name="tabler:rss" width="20" height="20" />
+      <Icon name="tabler:rss" size={20} />
     </a>
   </small>
 </footer>
-<style>
-  footer {
-    --padding: 25px;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding: var(--padding) 0;
-    text-align: center;
-    width: 100%;
-    height: calc(var(--footer-height)-2 * (var(--padding)));
-    background-color: var(--color-bg);
-    box-shadow: var(--shadow-md);
-  }
-</style>

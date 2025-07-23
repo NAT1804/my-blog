@@ -1,24 +1,15 @@
 ---
-import { Icon } from "astro-icon";
+// import { Icon } from "astro-icon/components";
 import Link from "../components/Link.astro";
 import MainLayout from "../layouts/MainLayout.astro";
 ---
 
 <MainLayout title="Page not found" description="Page not exists">
-  <main class="container">
+  <main class="container grid place-items-center text-center gap-4">
     <h1>404 - Page Not Found</h1>
     <Link href="/" aria-label="Go home">
-      <Icon name="tabler:home" width="30" />
+      <!-- <Icon name="tabler:home-2" size={30} /> -->
       Go back home
     </Link>
   </main>
 </MainLayout>
-
-<style>
-  .container {
-    display: grid;
-    place-items: center;
-    text-align: center;
-    gap: 1rem;
-  }
-</style>

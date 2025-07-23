@@ -2,7 +2,7 @@
 title: "Using MDX"
 description: "Lorem ipsum dolor sit amet"
 pubDate: "Jul 02 2022"
-heroImage: { src: "/placeholder-hero.jpg", alt: "Hero Image" }
+heroImage: "/placeholder-hero.jpg"
 tags: ["Reference docs"]
 isDraft: false
 language: "en"

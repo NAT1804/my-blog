@@ -4,10 +4,7 @@ export default z.object({
   isDraft: z.boolean(),
   title: z.string(),
   sortOrder: z.number(),
-  heroImage: z.object({
-    src: z.string(),
-    alt: z.string(),
-  }),
+  heroImage: z.string(),
   description: z.string(),
   language: z.enum(["en", "vn"]).default("en").optional(),
   author: z.string().default("Tuanna184-dev").optional(),

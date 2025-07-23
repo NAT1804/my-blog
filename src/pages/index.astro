@@ -1,17 +1,17 @@
 ---
 import MainLayout from "../layouts/MainLayout.astro";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
-import { Image } from "@astrojs/image/components";
+import { Image } from "astro:assets";
 import Link from "../components/Link.astro";
 ---
 
 <MainLayout title={SITE_TITLE} description={SITE_DESCRIPTION}>
   <main>
-    <h1>🧑‍🚀 Hello, I'm <span>Tuan</span>!</h1>
+    <h1>🧑‍🚀 Hello, I'm <span class="text-primary">Tuan</span>!</h1>
     <h3>A passionate web developer from Vietnam 🇻🇳</h3>
     <div class="about-me">
       <Image
-        class="hero-image"
+        class="hero-image rounded-[10px] mr-2.5 mb-2.5 object-cover object-center shadow-lg float-left"
         src="/personal-img.jpg"
         alt="Hero Image"
         width={200}
@@ -43,35 +43,3 @@ import Link from "../components/Link.astro";
     });
   }
 </script>
-<style lang="scss">
-  /* custom media query breakpoints */
-  @custom-media --sm (width >= 480px);
-  @custom-media --md (width >= 768px);
-  @custom-media --lg (width >= 1201px);
-  @custom-media --xl (width >= 1440px);
-
-  h1 {
-    span {
-      color: var(--primary-text-color);
-    }
-  }
-  .about-me {
-    // display: grid;
-    // align-items: center;
-
-    @media (--md) {
-      // grid-template-columns: 1fr 2fr;
-      // place-content: center;
-    }
-
-    .hero-image {
-      border-radius: 10px;
-      margin-right: 10px;
-      margin-bottom: 10px;
-      object-fit: cover;
-      object-position: center;
-      box-shadow: var(--shadow-lg);
-      float: left;
-    }
-  }
-</style>

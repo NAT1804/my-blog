@@ -1,44 +1,21 @@
 ---
-// import { HEADER_TITLE } from "../consts";
 import Navbar from "./Navbar.astro";
-// import { Image } from "@astrojs/image/components";
-import { Icon } from "astro-icon";
+import { Icon } from "astro-icon/components";
 ---
 
-<header>
-  <h2>
-    <a href="/" class="mylogo" aria-label="Go home">
-      <Icon name="mylogo" width="60" />
-    </a>
-  </h2>
-  <Navbar />
+<header
+  class="fixed top-0 right-0 left-0 bg-bg h-[var(--header-height)] shadow-md mx-auto"
+>
+  <div class="flex items-center justify-between max-w-2xl mx-auto">
+    <h2 class="my-2">
+      <a
+        href="/"
+        class="mylogo flex items-center no-underline"
+        aria-label="Go home"
+      >
+        <Icon name="mylogo" size={60} />
+      </a>
+    </h2>
+    <Navbar />
+  </div>
 </header>
-<style lang="scss">
-  header {
-    // margin: 0em 0 2em;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    // position: relative;
-    position: fixed;
-    top: 0;
-    right: 0;
-    left: 0;
-    background-color: var(--color-bg);
-    height: var(--header-height);
-    box-shadow: var(--shadow-md);
-    max-width: 65ch;
-    margin: auto;
-    padding: 0 20px;
-  }
-  h2 {
-    margin: 0.5em 0;
-    // width: 100%;
-    a {
-      display: flex;
-      align-items: center;
-      text-decoration: none;
-      // color: var(--secondary-text-color);
-    }
-  }
-</style>
