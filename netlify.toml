@@ -1,0 +1,15 @@
+[build]
+  command = "npm run build"  # Or "yarn build" if you're using Yarn
+  publish = "dist"           # Adjust this to your output folder (e.g., "build" or "public")
+
+[build.environment]
+  NODE_VERSION = "18"
+
+[[plugins]]
+  package = "@netlify/plugin-lighthouse"
+
+# Optional: redirect settings if you're using client-side routing (like in React, Angular, Vue, etc.)
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
