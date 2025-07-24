@@ -2,9 +2,6 @@
   "name": "tuanna184.blog",
   "type": "module",
   "version": "1.0.0",
-  "engines": {
-    "node": "18"
-  },
   "browserslist": [
     "defaults"
   ],
